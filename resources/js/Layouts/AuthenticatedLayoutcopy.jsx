@@ -4,7 +4,6 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
-import Homepage from '@/Pages/Homepage';
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -23,10 +22,9 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Tokalink
+                                    Tokalink2
                                 </NavLink>
                             </div>
-
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
@@ -114,7 +112,7 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
             </nav>
-            {/* <Homepage /> */}
+
 
             {header && (
                 <header className="bg-white shadow">
@@ -124,5 +122,6 @@ export default function Authenticated({ user, header, children }) {
 
             <main>{children}</main>
         </div>
+
     );
 }
