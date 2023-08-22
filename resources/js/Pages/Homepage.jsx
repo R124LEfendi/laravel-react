@@ -1,9 +1,7 @@
-import * as React from 'react';
+import React from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom'; // Import komponen yang diperlukan dari react-router-dom
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
 import { styled, useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import MuiDrawer from '@mui/material/Drawer';
@@ -11,17 +9,20 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { Mail, FoodBank, People, Group } from '@mui/icons-material';
+
+// Import komponen yang digunakan di bawah rute
+import Costumer from './Costumer';
+import Sales from './Sales';
+import Proposal from './Proposal';
+import About from './About';
 
 const drawerWidth = 240;
 
@@ -51,7 +52,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
 
@@ -90,10 +90,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function Homepage({ user, header, children }) {
-
-    const theme = useTheme();
+export default function Homepage() {
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate(); // Gunakan useNavigate langsung di sini
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -103,110 +102,83 @@ export default function Homepage({ user, header, children }) {
         setOpen(false);
     };
 
-
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <div className="min-h-screen bg-gray-100">
-                <nav className="bg-white border-b border-gray-100">
-                    <div >
-
-
-                        <Drawer variant="permanent" open={open}>
-                            <CssBaseline />
-                            <AppBar position="fixed" open={open} >
-                                <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <div>
+            <Box sx={{ flexGrow: 1 }}>
+                <div className="min-h-screen bg-gray-100">
+                    <nav className="bg-white border-b border-gray-100">
+                        <div>
+                            <Drawer variant="permanent" open={open}>
+                                <CssBaseline />
+                                <AppBar position="fixed" open={open}>
+                                    <Toolbar sx={{ justifyContent: 'space-between' }}>
+                                        <IconButton
+                                            color="inherit"
+                                            aria-label="open drawer"
+                                            onClick={handleDrawerOpen}
+                                            edge="start"
+                                            sx={{
+                                                marginRight: 5,
+                                                ...(open && { display: 'none' }),
+                                            }}
+                                        >
+                                            <MenuIcon />
+                                        </IconButton>
+                                        <Button color="inherit" href="/">
+                                            Tokalink
+                                        </Button>
+                                        <Button color="inherit">Login</Button>
+                                    </Toolbar>
+                                </AppBar>
+                                <DrawerHeader>
                                     <IconButton
                                         color="inherit"
-                                        aria-label="open drawer"
-                                        onClick={handleDrawerOpen}
+                                        aria-label={open ? 'close drawer' : 'open drawer'}
+                                        onClick={open ? handleDrawerClose : handleDrawerOpen}
                                         edge="start"
-                                        sx={{
-                                            marginRight: 5,
-                                            ...(open && { display: 'none' }),
-                                        }}
                                     >
-                                        <MenuIcon />
+                                        {open ? <MenuIcon /> : <MenuIcon />}
                                     </IconButton>
+                                </DrawerHeader>
+                                <Divider />
 
-                                    <Button color="inherit" href="/">
-                                        Tokalink
-                                    </Button>
-
-
-                                    <Button color="inherit">Login</Button>
-
-                                </Toolbar>
-
-                            </AppBar>
-
-                            <DrawerHeader>
-                                <IconButton
-                                    color="inherit"
-                                    aria-label={open ? 'close drawer' : 'open drawer'}
-                                    onClick={open ? handleDrawerClose : handleDrawerOpen}
-                                    edge="start"
-
-                                >
-                                    {open ? <MenuIcon /> : <MenuIcon />}
-                                </IconButton>
-                            </DrawerHeader>
-                            <Divider />
-                            <List>
-                                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                                        <ListItemButton
-                                            sx={{
-                                                minHeight: 48,
-                                                justifyContent: open ? 'initial' : 'center',
-                                                px: 2.5,
-                                            }}
+                                <List>
+                                    {[
+                                        { text: 'Costumer', path: '/costumer', icon: <Group /> },
+                                        { text: 'Sales', path: '/sales', icon: <Mail /> },
+                                        { text: 'Proposal', path: '/proposal', icon: <People /> },
+                                        { text: 'About', path: '/about', icon: <FoodBank /> },
+                                    ].map((item) => (
+                                        <ListItem
+                                            key={item.text}
+                                            disablePadding
+                                            sx={{ display: 'block' }}
+                                            onClick={() => handleNavigate(item.path)}
                                         >
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                            </ListItemIcon>
-                                            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                ))}
-                            </List>
-                            <Divider />
-                            <List>
-                                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                                        <ListItemButton
-                                            sx={{
-                                                minHeight: 48,
-                                                justifyContent: open ? 'initial' : 'center',
-                                                px: 2.5,
-                                            }}
-                                        >
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                            </ListItemIcon>
-                                            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </Drawer>
+                                            <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
+                                                <ListItemIcon
+                                                    sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}
+                                                >
+                                                    {item.icon}
+                                                </ListItemIcon>
+                                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    ))}
+                                </List>
+                                <Divider />
+                                {/* ... Kode lainnya ... */}
+                            </Drawer>
+                        </div>
+                    </nav>
+                </div>
+            </Box>
 
-
-                    </div>
-                </nav>
-            </div>
-        </Box>
+            <Outlet /> {/* Ini akan menampilkan komponen di bawah rute yang sesuai */}
+        </div>
     );
 }
