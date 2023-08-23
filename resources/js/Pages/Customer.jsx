@@ -1,8 +1,7 @@
 import React from 'react'
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 
-import CostumerButton from './pageView/CostumerComponents/CostumerButton'
+import { Box, Paper } from '@mui/material'
+import CustomerButton from './pageView/CustomerComponents/CustomerButton'
 
 
 
@@ -10,14 +9,16 @@ export default function Costumer() {
 
 
     return (
+
         <Box>
             <Paper>
                 <div>
                     <div>Costumer</div>
-                    <CostumerButton />
+                    <CustomerButton />
                 </div>
             </Paper>
         </Box>
+
 
     )
 }
