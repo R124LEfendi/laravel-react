@@ -30,7 +30,7 @@ export default function Navbar({ isNavbarOpen, handleToggle }) {
                     <Button color="inherit" href="/">
                         Tokalink
                     </Button>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">Profile</Button>
                 </Toolbar>
 
             </AppBar>

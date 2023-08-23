@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,7 @@ use App\Models\News;
 |
 */
 
-Route::get('/', [NewsController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
@@ -38,9 +39,9 @@ Route::get('/customer', function () {
     return Inertia::render('Customer');
 })->middleware(['auth', 'verified'])->name('customer');
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-})->middleware(['auth', 'verified'])->name('about');
+Route::get('/invoice', function () {
+    return Inertia::render('Invoice');
+})->middleware(['auth', 'verified'])->name('invoice');
 
 Route::get('/sales', function () {
     return Inertia::render('Sales');
