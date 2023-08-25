@@ -20,7 +20,7 @@ use App\Models\News;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
@@ -34,6 +34,15 @@ Route::get('/welcome', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/mini-drawer', function () {
+    return Inertia::render('MiniDrawer');
+})->middleware(['auth', 'verified'])->name('mini-drawer');
+
+Route::get('/', function () {
+    return Inertia::render('Homepage');
+})->middleware(['auth', 'verified'])->name('homepage');
 
 Route::get('/customer', function () {
     return Inertia::render('Customer');
@@ -50,6 +59,7 @@ Route::get('/sales', function () {
 Route::get('/proposal', function () {
     return Inertia::render('Proposal');
 })->middleware(['auth', 'verified'])->name('proposal');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

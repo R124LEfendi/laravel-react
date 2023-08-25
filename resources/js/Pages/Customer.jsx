@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Box, Paper } from '@mui/material'
-import CustomerButton from './pageView/CustomerComponents/CustomerButton'
+import CustomerButton from './pageView/CostumerComponents/CostumerButton'
 
 
 

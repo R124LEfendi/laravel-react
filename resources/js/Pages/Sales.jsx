@@ -1,9 +1,26 @@
 import React from 'react'
+import Navbar from './pageView/HomepageComponents/Navbar'
+import { Box, Grid, Paper } from '@mui/material'
 
 export default function Sales() {
 
 
     return (
-        <div>Sales</div>
+        <>
+            <Navbar >
+
+            </Navbar>
+            <Box>
+                <Grid container spacing={2} sx={{ display: "flex", justifyContent: "end" }}>
+
+                    <Grid item xs={9}>
+                        <Paper>
+                            djfhsdhn
+                        </Paper>
+                    </Grid>
+
+                </Grid>
+            </Box>
+        </>
     )
 }

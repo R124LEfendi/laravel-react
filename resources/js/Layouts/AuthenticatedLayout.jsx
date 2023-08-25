@@ -5,25 +5,35 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 import Homepage from '@/Pages/Homepage';
+import Logo from '../Components/Logo-1.jpg';
+import { Typography } from '@mui/material';
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
-    return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    console.log(user);
+
+    return (<>
+
+
+
+        <div className=" bg-gray-100">
+            <nav className="bg-white border-b border-gray-100 grid ">
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-0 m-0">
+
                     <div className="flex justify-between h-16">
                         <div className="flex">
+                            {/* <div >gdfdgd</div> */}
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <img src={Logo} style={{ width: "75px", height: "65px" }} />
                                 </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Tokalink
+                                    <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>Tokalink</Typography>
                                 </NavLink>
                             </div>
 
@@ -103,6 +113,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">{user.name}</div>
                             <div className="font-medium text-sm text-gray-500">{user.email}</div>
+
                         </div>
 
                         <div className="mt-3 space-y-1">
@@ -114,7 +125,7 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
             </nav>
-            {/* <Homepage /> */}
+            <div>dufkskj</div>
 
             {header && (
                 <header className="bg-white shadow">
@@ -123,6 +134,12 @@ export default function Authenticated({ user, header, children }) {
             )}
 
             <main>{children}</main>
+            <div style={{ width: "2rem", backgroundColor: "red" }}></div>
+
         </div>
+
+
+
+    </>
     );
 }

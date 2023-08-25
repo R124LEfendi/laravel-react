@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { IconButton, Paper } from '@mui/material';
+import { Grid, IconButton, Paper } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { red } from '@mui/material/colors';
 import { Box } from '@mui/material';
@@ -24,10 +24,10 @@ export default function Sidebar({ isSidebarOpen, handleToggle, menuItems }) {
 
     return (
         <Box>
-            <Paper>
-                <Drawer variant="permanent" open={isSidebarOpen}>
+            <Paper sx={{ borderRadius: "10px" }} >
+                <Drawer variant="permanent" open={isSidebarOpen} >
                     <CssBaseline />
-                    <div style={{ display: 'flex', justifyContent: 'center', height: '63px', alignItems: 'center', paddingLeft: 10, backgroundColor: '#1976d2' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', height: '63px', alignItems: 'center', paddingLeft: 10, }}>
                         <DrawerHeader handleToggle={handleToggle} />
                     </div>
                     <div style={sidebarStyle}>
@@ -61,7 +61,10 @@ export default function Sidebar({ isSidebarOpen, handleToggle, menuItems }) {
                         <Divider />
                     </div>
                 </Drawer>
+
+
             </Paper>
+
         </Box>
     );
 }
