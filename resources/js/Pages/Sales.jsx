@@ -12,19 +12,14 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const menuItems = [
-    { text: 'Customer', href: '/customer', icon: <Group /> },
-    { text: 'Sales', href: '/sales', icon: <TrendingUp /> },
-    { text: 'Proposal', href: '/proposal', icon: <Article /> },
-    { text: 'Invoice', href: '/invoice', icon: <RequestQuote /> },
-];
+
 
 export default function Sales() {
 
 
 
     return (<>
-        <MiniDrawer menuItems={menuItems} />
+        <MiniDrawer />
 
 
         <Box sx={{ flexGrow: 1, backgroundColor: "#f8f7fa" }}>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Card, CardHeader, CardContent, Typography, Box, Paper } from '@mui/material'
 import MiniDrawer from '../Layouts/MiniDrawer'
 import styled from '@mui/material/styles/styled';
-import { Article, Group, RequestQuote, TrendingUp } from '@mui/icons-material';
+import { Article, Group, Home, RequestQuote, TrendingUp } from '@mui/icons-material';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -12,19 +12,21 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const menuItems = [
-    { text: 'Customer', href: '/customer', icon: <Group /> },
-    { text: 'Sales', href: '/sales', icon: <TrendingUp /> },
-    { text: 'Proposal', href: '/proposal', icon: <Article /> },
-    { text: 'Invoice', href: '/invoice', icon: <RequestQuote /> },
-];
+// const menuItems = [
+//     { text: 'Customer', href: '/customer', icon: <Group /> },
+//     { text: 'Sales', href: '/sales', icon: <TrendingUp /> },
+//     { text: 'Proposal', href: '/proposal', icon: <Article /> },
+//     { text: 'Invoice', href: '/invoice', icon: <RequestQuote /> },
+//     { text: 'Home', href: '/', icon: <Home /> },
+
+// ];
 
 export default function Homepage() {
 
 
 
     return (<>
-        <MiniDrawer menuItems={menuItems} />
+        <MiniDrawer />
 
 
         <Box sx={{ flexGrow: 1, backgroundColor: "#f8f7fa" }}>

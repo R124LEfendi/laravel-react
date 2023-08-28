@@ -27,9 +27,9 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { usePage } from '@inertiajs/react'
 import { Head } from '@inertiajs/react';
 import { Button } from '@mui/material';
-import { Group, People } from '@mui/icons-material';
+import { Article, Group, Home, People, RequestQuote, TrendingUp } from '@mui/icons-material';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -48,7 +48,7 @@ const closedMixin = (theme) => ({
     overflowX: 'hidden',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
+        width: `calc(${theme.spacing(10)} + 1px)`,
     },
 });
 
@@ -96,7 +96,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function MiniDrawer({ header, children, menuItems }) {
+const menuSales = [
+    { text: 'Customer', href: '/customer', icon: <Group /> },
+    { text: 'Item Sales', href: '/sales', icon: <TrendingUp /> },
+    { text: 'Proposal', href: '/proposal', icon: <Article /> },
+    { text: 'Invoice', href: '/invoice', icon: <RequestQuote /> },
+];
+
+const menuPurchase = [
+    { text: 'Vendors', href: '/vendor', icon: <Group /> },
+    { text: 'Item Purchase', href: '/purchase', icon: <TrendingUp /> },
+    { text: 'Bill', href: '/bill', icon: <Article /> },
+
+];
+
+export default function MiniDrawer({ header, children, }) {
 
     const { auth } = usePage().props
 
@@ -190,7 +204,7 @@ export default function MiniDrawer({ header, children, menuItems }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             // user={auth.user}
                                             >
                                                 {auth.user.name}
@@ -296,16 +310,40 @@ export default function MiniDrawer({ header, children, menuItems }) {
                     </DrawerHeader>
                     <Divider />
                     <List>
-                        {menuItems.map((item, index) => (
+
+                        <ListItem disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+
+
+                                }}
+                                href="/"
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <Home />
+                                </ListItemIcon>
+                                <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                        <Divider />
+
+                        {menuSales.map((item, index) => (
                             <ListItem key={index} disablePadding sx={{ display: 'block' }}>
                                 <ListItemButton
                                     sx={{
                                         minHeight: 48,
                                         justifyContent: open ? 'initial' : 'center',
                                         px: 2.5,
-
                                     }}
-                                    component="a"
                                     href={item.href}
                                 >
                                     <ListItemIcon
@@ -321,8 +359,37 @@ export default function MiniDrawer({ header, children, menuItems }) {
                                 </ListItemButton>
                             </ListItem>
                         ))}
+                        <Divider />
+
+
+                        {menuPurchase.map((item, index) => (
+                            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+                                <ListItemButton
+                                    sx={{
+                                        minHeight: 48,
+                                        justifyContent: open ? 'initial' : 'center',
+                                        px: 2.5,
+                                    }}
+                                    href={item.href}
+                                >
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                        <Divider />
+
+
                     </List>
-                    <Divider />
+
 
                 </Drawer>
 

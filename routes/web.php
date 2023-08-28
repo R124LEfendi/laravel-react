@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -36,15 +37,19 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/mini-drawer', function () {
-    return Inertia::render('MiniDrawer');
-})->middleware(['auth', 'verified'])->name('mini-drawer');
+// Route::get('/mini-drawer', function () {
+//     return Inertia::render('MiniDrawer');
+// })->middleware(['auth', 'verified'])->name('mini-drawer');
 
 Route::get('/', function () {
     return Inertia::render('Homepage');
 })->middleware(['auth', 'verified'])->name('homepage');
 
-Route::get('/customer', function () {
+Route::get('/add-customer', function () {
+    return Inertia::render('AddCustomer');
+})->middleware(['auth', 'verified'])->name('add customer');
+
+Route::get('/customer', 'CustomersController', function () {
     return Inertia::render('Customer');
 })->middleware(['auth', 'verified'])->name('customer');
 
