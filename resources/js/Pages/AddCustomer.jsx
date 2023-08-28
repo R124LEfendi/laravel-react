@@ -2,6 +2,7 @@ import MiniDrawer from '@/Layouts/MiniDrawer'
 import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { useState } from 'react';
+import { useForm } from '@inertiajs/react';
 
 
 export default function AddCustomer() {
