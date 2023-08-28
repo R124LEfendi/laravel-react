@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
+import React from 'react'
+import { Grid, Card, CardHeader, CardContent, Typography, Box, Paper } from '@mui/material'
+import MiniDrawer from '../Layouts/MiniDrawer'
+import styled from '@mui/material/styles/styled';
+import { Article, Group, RequestQuote, TrendingUp } from '@mui/icons-material';
 
-import { Group, TrendingUp, Article, RequestQuote } from '@mui/icons-material';
-import Sidebar from './pageView/HomepageComponents/Sidebar';
-import Navbar from './pageView/HomepageComponents/Navbar';
-import { Grid, Box } from '@mui/material';
-
-const drawerWidth = 240;
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 const menuItems = [
     { text: 'Customer', href: '/customer', icon: <Group /> },
@@ -16,37 +20,29 @@ const menuItems = [
 ];
 
 export default function Homepage() {
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-    const toggleSidebar = () => {
-        setSidebarOpen(!isSidebarOpen);
-    };
-
-    return (
-        <>
-
-            <Box >
-
-
-                <div className="min-h-screen bg-gray-100">
-                    <CssBaseline />
-
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={12}>
-                            <Navbar isSidebarOpen={isSidebarOpen} handleToggle={toggleSidebar} />
-                        </Grid>
-                        <Grid item xs={1}>
-                            <Sidebar isSidebarOpen={isSidebarOpen} handleToggle={toggleSidebar} menuItems={menuItems} />
-                        </Grid>
-
-                    </Grid>
 
 
 
+    return (<>
+        <MiniDrawer menuItems={menuItems} />
 
-                </div>
 
-            </Box>
-        </>
-    );
+        <Box sx={{ flexGrow: 1, backgroundColor: "#f8f7fa" }}>
+            <Grid container spacing={2}>
+                <Grid item xs={2} md={2}>
+
+                </Grid>
+                <Grid item xs={9} md={9}>
+                    <Paper elevation={6} sx={{ padding: 10, borderRadius: 5 }} >
+                        <Typography variant="h4" component="div" gutterBottom>
+                            Ini adalah halaman home
+                        </Typography>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor animi perspiciatis doloribus. Tenetur, minus rem voluptatibus voluptates distinctio autem quisquam enim perferendis nobis consequatur soluta praesentium! Doloremque asperiores accusantium nostrum?</p>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Box>
+
+    </>
+    )
 }

@@ -125,7 +125,7 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
             </nav>
-            <div>dufkskj</div>
+
 
             {header && (
                 <header className="bg-white shadow">

@@ -27,6 +27,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { usePage } from '@inertiajs/react'
 import { Head } from '@inertiajs/react';
 import { Button } from '@mui/material';
+import { Group, People } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -95,7 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function MiniDrawer({ header, children, }) {
+export default function MiniDrawer({ header, children, menuItems }) {
 
     const { auth } = usePage().props
 
@@ -111,14 +112,14 @@ export default function MiniDrawer({ header, children, }) {
     const handleDrawerOpen = () => {
         setTimeout(() => {
             setOpen(true);
-        }, 300)
+        }, 100)
 
     };
 
     const handleDrawerClose = () => {
         setTimeout(() => {
             setOpen(false);
-        }, 300)
+        }, 100)
 
     };
 
@@ -131,7 +132,7 @@ export default function MiniDrawer({ header, children, }) {
 
             <Head title="Tokalink" />
 
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', backgroundColor: "#f8f7fa" }}>
 
 
                 <CssBaseline />
@@ -153,17 +154,18 @@ export default function MiniDrawer({ header, children, }) {
 
 
                                 },
-                                // marginRight: {
-                                //     xs: 0,
-                                //     sm: 1,
-                                //     md: 1,
-                                //     xl: 1,
-                                // }
-                                // ,
+                                paddingLeft: {
+                                    xs: 1,
+                                    sm: 0,
+                                    md: 0,
+                                    xl: 0,
+                                }
+                                ,
                                 ...(open && { display: 'none' }),
                             }}
                         >
                             <MenuIcon />
+
                         </IconButton>
 
                         <div style={{ display: "flex", justifyContent: 'space-between', alignItems: 'center' }}>
@@ -175,7 +177,7 @@ export default function MiniDrawer({ header, children, }) {
                                 </div>
 
                                 <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    <NavLink href="/" active={route().current('dashboard')}>
                                         <Typography variant="h5" component="div" sx={{ flexGrow: 1, color: "white" }}>Tokalink</Typography>
                                     </NavLink>
                                 </div>
@@ -285,7 +287,8 @@ export default function MiniDrawer({ header, children, }) {
 
                 </AppBar>
 
-                <Drawer variant="permanent" open={open}>
+                <Drawer variant="permanent" open={open}
+                >
                     <DrawerHeader>
                         <IconButton onClick={handleDrawerClose}>
                             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -293,14 +296,17 @@ export default function MiniDrawer({ header, children, }) {
                     </DrawerHeader>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                        {menuItems.map((item, index) => (
+                            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
                                 <ListItemButton
                                     sx={{
                                         minHeight: 48,
                                         justifyContent: open ? 'initial' : 'center',
                                         px: 2.5,
+
                                     }}
+                                    component="a"
+                                    href={item.href}
                                 >
                                     <ListItemIcon
                                         sx={{
@@ -309,54 +315,25 @@ export default function MiniDrawer({ header, children, }) {
                                             justifyContent: 'center',
                                         }}
                                     >
-                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                        {item.icon}
                                     </ListItemIcon>
-                                    <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                    <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
                                 </ListItemButton>
                             </ListItem>
                         ))}
                     </List>
                     <Divider />
-                    <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                                <ListItemButton
-                                    sx={{
-                                        minHeight: 48,
-                                        justifyContent: open ? 'initial' : 'center',
-                                        px: 2.5,
-                                    }}
-                                >
-                                    <ListItemIcon
-                                        sx={{
-                                            minWidth: 0,
-                                            mr: open ? 3 : 'auto',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
+
                 </Drawer>
 
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <DrawerHeader />
 
                 </Box>
-                {/*
-                <AppBar position="static">
-                    <Toolbar>
 
-                        <Typography variant="h5" component="div" sx={{ display: "flex" }}>
-                            News
-                        </Typography>
-                        <Button color="inherit">Login</Button>
-                    </Toolbar>
-                </AppBar> */}
+
+
+
             </Box>
 
         </>
