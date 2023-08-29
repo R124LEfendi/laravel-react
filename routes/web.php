@@ -49,7 +49,7 @@ Route::get('/add-customer', function () {
     return Inertia::render('AddCustomer');
 })->middleware(['auth', 'verified'])->name('add customer');
 
-Route::get('/customer', 'CustomersController', function () {
+Route::get('/customer',  function () {
     return Inertia::render('Customer');
 })->middleware(['auth', 'verified'])->name('customer');
 
